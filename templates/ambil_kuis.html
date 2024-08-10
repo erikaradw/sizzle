@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'base_user.html' %}
+{% load static %}
+
+{% block body_block %}
+
+<div class="container quiz-container mt-5">
+    <h2 class="quiz-part">{{ kuis.judul }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="question-wrapper">
+            <h4 class="no-pertanyaan">Pertanyaan 1</h4>
+            <fieldset>
+                <legend class="soal">1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem dicta dolorem ea asperiores eveniet neque?</legend>
+                <div class="checkbox-wrapper">
+                    <label for="chk1"><input type="checkbox" id="chk1" name="" value="Sepak bola"> Sepak bola</label>
+                    <label for="chk2"><input type="checkbox" id="chk2" name="" value="Bersepeda"> Bersepeda</label>
+                    <label for="chk3"><input type="checkbox" id="chk3" name="" value="Membaca"> Membaca</label>
+                    <label for="chk4"><input type="checkbox" id="chk4" name="" value="Musik"> Musik</label>
+                </div>
+              </fieldset>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+</html>

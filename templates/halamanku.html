@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_block %}
+<title>Sizzle - Halaman {{ user.first_name }} {{ user.last_name }}</title>
+
+<div class="container mt-5 mb-5">
+    <h2 class="font-1 mb-5">Halamanku</h2>
+    <div class="tambah-resep mb-5">
+        <div class="col-md-12 text-center mb-4">
+            <h3 class="font-1 mt-5">Ajukan Resep</h3>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <form>
+                    <div class="mb-3">
+                        <label class="mb-2">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label class="mb-2">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label class="mb-2">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label class="mb-2">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label class="mb-2">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label class="mb-2">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            </div>
+        </div>
+        </form>
+    </div><br>
+
+    <div class="resep-tersimpan">
+        <div class="col-md-12 text-center mb-4">
+            <h3 class="font-1 mt-5">Resep Tersimpan</h3>
+        </div>
+        <div class="owl-carousel owl-theme" id="carouselExample">
+            {% for resep in resep_tersimpan_list %}
+            <div class="item">
+                <a href="{% url 'detail_resep' resep.id_resep %}" class="text-decoration-none">
+                    <div class="card shadow-none rounded-3 border-0">
+                        <div class="position-relative img-container">
+                            {% if resep.gambar_resep %}
+                            <img src="{{ resep.gambar_resep.url }}" alt="{{ resep.nama_resep }}" class="img-fluid">
+                            {% else %}
+                            <img src="{% static 'images/sizzle-logo.svg' %}" alt="Default Image" class="img-fluid">
+                            {% endif %}
+                            <i class="bi bi-play-circle-fill position-absolute top-50 start-50 translate-middle text-white"
+                                style="font-size: 3rem"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h5 class="card-title text-body-emphasis fw-normal">{{ resep.nama_resep }}</h5>
+                                <div class="rating">
+                                    {% for i in "12345" %}
+                                    {% if forloop.counter <= resep.rating|floatformat %}
+                                    <span class="star text-warning">&#9733;</span>
+                                    {% else %}
+                                    <span class="star">&#9733;</span>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <br />
+                                <span class="badge transparent-badge text-body-emphasis fw-normal rounded-pill bi bi-stopwatch">
+                                    {{ resep.durasi }} Menit
+                                </span> |
+                                <span class="badge transparent-badge text-body-emphasis fw-normal rounded-pill bi bi-people-fill">
+                                    {{ resep.porsi }} Porsi
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="carousel-controls">
+            <button class="carousel-control-prev" type="button">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <br><br><br><br><br>
+
+        <div class="col-md-12 text-center mt-5">
+            <a href="{% url 'resep' %}" class="second-btn">Lihat Semua Resep Makanan</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'base_user.html' %}
+{% load static %}
+
+{% block body_block %}
+<title>Sizzle - {{ kuis.judul }}</title>
+
+<div class="container quiz-container mt-5">
+    <h2 class="quiz-part">{{ kuis.judul }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="question-wrapper">
+            {% for field in form %}
+                <fieldset>
+                    <legend class="soal">{{ field.label }}</legend>
+                    <div class="checkbox-wrapper mb-5">
+                        {% for widget in field %}
+                            <label>
+                                {{ widget.tag }}
+                                {{ widget.choice_label }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+</html>
